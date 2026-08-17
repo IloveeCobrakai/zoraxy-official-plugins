@@ -246,12 +246,12 @@
    "name": "FQDN Whitelist Sync",
    "author": "driin0",
    "author_contact": "driin0@users.noreply.github.com",
-   "description": "Keeps access-control whitelists in sync with the resolved IPs of configured FQDNs",
+   "description": "Keeps access-control whitelists in sync with resolved FQDNs and published CDN provider ranges",
    "url": "https://github.com/driin0/zoraxy-fqdn-whitelist-sync",
    "type": 1,
    "version_major": 1,
-   "version_minor": 1,
-   "version_patch": 2,
+   "version_minor": 2,
+   "version_patch": 0,
    "static_capture_paths": null,
    "static_capture_ingress": "",
    "dynamic_capture_sniff": "",
@@ -268,17 +268,17 @@
     {
      "endpoint": "/plugin/api/whitelist/list",
      "method": "GET",
-     "reason": "Read the current whitelist to reconcile"
+     "reason": "Read the current whitelist to reconcile, and to recover the last authorised addresses and ranges after a restart"
     },
     {
      "endpoint": "/plugin/api/whitelist/ip/add",
      "method": "POST",
-     "reason": "Add resolved FQDN IPs to the whitelist"
+     "reason": "Add resolved FQDN addresses and published CDN provider ranges to the whitelist"
     },
     {
      "endpoint": "/plugin/api/whitelist/ip/remove",
      "method": "POST",
-     "reason": "Remove stale FQDN IPs from the whitelist"
+     "reason": "Remove addresses and ranges that are no longer authorised, and entries left in a legacy format"
     }
    ]
   },
@@ -418,6 +418,64 @@
    "linux_mipsle": "https://github.com/aroz-online/ztnc/releases/latest/download/ztnc_linux_mipsle",
    "linux_riscv64": "https://github.com/aroz-online/ztnc/releases/latest/download/ztnc_linux_riscv64",
    "windows_amd64": "https://github.com/aroz-online/ztnc/releases/latest/download/ztnc_windows_amd64.exe"
+  }
+ },
+ {
+  "IconPath": "https://raw.githubusercontent.com/IloveeCobrakai/zoraxy-path-access-control/refs/heads/main/icon.png",
+  "PluginIntroSpect": {
+   "id": "path-access-control",
+   "name": "Path Access Control",
+   "author": "IloveeCobrakai",
+   "author_contact": "https://github.com/IloveeCobrakai",
+   "description": "Apply existing IP/CIDR access rules to individual paths of tagged proxy hosts.",
+   "url": "https://github.com/IloveeCobrakai/zoraxy-path-access-control",
+   "type": 0,
+   "version_major": 1,
+   "version_minor": 0,
+   "version_patch": 1,
+   "static_capture_paths": null,
+   "static_capture_ingress": "",
+   "dynamic_capture_sniff": "/path-access-sniff",
+   "dynamic_capture_ingress": "/path-access-capture",
+   "ui_path": "/ui",
+   "subscription_path": "",
+   "subscriptions_events": null,
+   "permitted_api_endpoints": [
+    {
+     "endpoint": "/plugin/api/access/list",
+     "method": "GET",
+     "reason": "Loads existing access rules for path checks"
+    },
+    {
+     "endpoint": "/plugin/api/proxy/list",
+     "method": "POST",
+     "reason": "Lists configured HTTP proxy hosts for rule selection"
+    },
+    {
+     "endpoint": "/plugin/api/proxy/setTags",
+     "method": "POST",
+     "reason": "Assigns this router plugin to hosts with path access rules"
+    },
+    {
+     "endpoint": "/plugin/api/plugins/groups/list",
+     "method": "GET",
+     "reason": "Checks the plugin routing group"
+    },
+    {
+     "endpoint": "/plugin/api/plugins/groups/add",
+     "method": "POST",
+     "reason": "Adds this plugin to its routing group"
+    }
+   ]
+  },
+  "DownloadURLs": {
+   "linux_386": "https://github.com/IloveeCobrakai/zoraxy-path-access-control/releases/latest/download/path-access-control_linux_386",
+   "linux_amd64": "https://github.com/IloveeCobrakai/zoraxy-path-access-control/releases/latest/download/path-access-control_linux_amd64",
+   "linux_arm": "https://github.com/IloveeCobrakai/zoraxy-path-access-control/releases/latest/download/path-access-control_linux_arm",
+   "linux_arm64": "https://github.com/IloveeCobrakai/zoraxy-path-access-control/releases/latest/download/path-access-control_linux_arm64",
+   "linux_mipsle": "https://github.com/IloveeCobrakai/zoraxy-path-access-control/releases/latest/download/path-access-control_linux_mipsle",
+   "linux_riscv64": "https://github.com/IloveeCobrakai/zoraxy-path-access-control/releases/latest/download/path-access-control_linux_riscv64",
+   "windows_amd64": "https://github.com/IloveeCobrakai/zoraxy-path-access-control/releases/latest/download/path-access-control_windows_amd64.exe"
   }
  },
  {
